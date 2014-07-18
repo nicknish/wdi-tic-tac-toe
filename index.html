@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="TicTacToe">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>Tic Tac Toe</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+	<script src="js/script.js"></script>
+</head>
+<body>
+	<div class="container" ng-controller="tttCtrl">
+		<div ng-class="{ box: true, blue: box.color == 'blue', green: box.color =='green' }" ng-click="isSelected(box)" id="{{ box.name }}" ng-repeat="box in boxes">
+		</div>
+	</div>
+</body>
+</html>
