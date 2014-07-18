@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div class="container" ng-controller="tttCtrl">
-		<div ng-class="{ box: true, blue: box.color == 'blue', green: box.color =='green' }" ng-click="isSelected(box)" id="{{ box.name }}" ng-repeat="box in boxes">
+		<div id="{{ box.name }}" ng-class="{ box: true, blue: box.color == 'blue', green: box.color =='green' }" ng-click="isSelected(box)"  ng-repeat="box in boxes">
 		</div>
 	</div>
 </body>
