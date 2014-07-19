@@ -5,6 +5,7 @@
 }
 
 .box {
+	background-color: white;
 	width: 100px;
 	height: 100px;
 	border: 1px solid black;
@@ -17,9 +18,11 @@
 	transition: background-color .5s ease;
 }
 .container {
-	max-width: 350px;
+	/*background-color: orange;*/
+	max-width: 334px;
 	margin: 0 auto;
-	padding-top: 5rem;
+	margin-top: 10rem;
+	/*box-shadow: 0 6px 20px #333;*/
 }
 
 .blue {

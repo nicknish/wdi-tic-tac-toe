@@ -3,49 +3,43 @@ var app = angular.module('TicTacToe', []);
 app.controller('tttCtrl', function($scope) {
 
     $scope.count = 2;
-    $scope.gameSelections = [];
+    $scope.blueSelection = [];
+    $scope.greenSelection = [];
 
     $scope.isSelected = function(box) {
 
-        var sArray = $scope.gameSelections;
-        // If there is a winner ... alert-win.
-
-        if ($scope.count === 11) {
+        if ($scope.count === 11) { //If all the tiles are filled without a winner, then cat's game
             alert("cat's game!");
         } else if ($scope.count % 2 === 0 && box.color === "" && box.color != "blue" && box.color != "green") {
             box.color = "blue";
             $scope.count = $scope.count + 1;
-            console.log("box.name: " + box.name + "; box.color: " + box.color);
-            sArray.push(box.name + "," + box.color);
-
-            for (i = 0; i <= sArray.length; i++) {
-                if (sArray.indexOf("1,blue") !== -1 && sArray.indexOf("2,blue") !== -1 && sArray.indexOf("3,blue")) {
-                    // alert("alert me");
-                    console.log(sArray);
-                }
-            }
-
-            console.log(sArray);
-            // $scope.isSelected();
-        } else if (($scope.count % 3 === 0 || $scope.count / 5 === 1 || $scope.count / 7 === 1) && box.color != "blue" && box.color != "green") {
+            $scope.blueSelection.push(box.name);
+            $scope.blueSelection.sort();
+            console.log("Blues: " + $scope.blueSelection);
+        } else if (($scope.count % 3 === 0 || $scope.count / 5 === 1 || $scope.count / 7 === 1) &&
+            box.color != "blue" && box.color != "green") {
             box.color = "green";
             $scope.count = $scope.count + 1;
-            console.log("box.name: " + box.name + "; box.color: " + box.color);
-            sArray.push(box.name + "," + box.color);
-
-            for (i = 0; i <= sArray.length; i++) {
-                if (sArray.indexOf("1,blue") !== -1 && sArray.indexOf("2,blue") !== -1 && sArray.indexOf("3,blue")) {
-                    // alert("alert me");
-                    console.log(sArray);
-                }
-            }
-
-            console.log(sArray);
-            // $scope.isSelected();
+            $scope.greenSelection.push(box.name);
+            $scope.greenSelection.sort();
+            console.log("Greens: " + $scope.greenSelection);
         } else {
-            alert("this has been selected"); // Maybe have a dynamicly updated prompt.	
+            alert("this has been selected"); // Maybe have a dynamically updated prompt.
         }
     };
+
+
+    // Just thinking about this, what if you have 1357. Technically there
+    // is a winning combo inside it, but how do you extract that?
+
+    // $scope.checkFtw = function(someArray) {
+    //     angular.copy(someArray, arrayToString);
+    //     for (i = 0; i <= $scope.winCombos.length; i++) {
+    //         if (arrayToString === $scope.winCombos[i]) {
+    //             alert("You win, you cheeky motherfucker!");
+    //         }
+    //     }
+    // };
 
     $scope.winCombos = [
         [1, 2, 3],
