@@ -16,6 +16,7 @@ app.controller('tttCtrl', function($scope) {
             $scope.blueSelection.push(box.name);
             $scope.blueSelection.sort();
             console.log("Blues: " + $scope.blueSelection);
+            $scope.checkFtw($scope.blueSelection);
         } else if (($scope.count % 3 === 0 || $scope.count / 5 === 1 || $scope.count / 7 === 1) &&
             box.color != "blue" && box.color != "green") {
             box.color = "green";
@@ -23,23 +24,25 @@ app.controller('tttCtrl', function($scope) {
             $scope.greenSelection.push(box.name);
             $scope.greenSelection.sort();
             console.log("Greens: " + $scope.greenSelection);
+            $scope.checkFtw($scope.greenSelection);
         } else {
             alert("this has been selected"); // Maybe have a dynamically updated prompt.
         }
     };
 
-
     // Just thinking about this, what if you have 1357. Technically there
     // is a winning combo inside it, but how do you extract that?
 
-    // $scope.checkFtw = function(someArray) {
-    //     angular.copy(someArray, arrayToString);
-    //     for (i = 0; i <= $scope.winCombos.length; i++) {
-    //         if (arrayToString === $scope.winCombos[i]) {
-    //             alert("You win, you cheeky motherfucker!");
-    //         }
-    //     }
-    // };
+    $scope.checkFtw = function(someArray) {
+        for (i = 0; i <= $scope.winCombos.length; i++) {
+            if (someArray[i] === $scope.winCombos[i][i]) {
+                if (someArray[1] === $scope.winCombos[i][1]) {}
+            } else if (someArray[0] === $scope.winCombos[i])
+        }
+    }
+
+    // Let's cycle over the incoming array, if the contents of said array
+    // match that of winCombo's contents then check deeper in the array?
 
     $scope.winCombos = [
         [1, 2, 3],
