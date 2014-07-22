@@ -81,8 +81,6 @@ app.controller('tttCtrl', function($scope) {
                 blueDiagonalRightLeft.push("(" + box.row + ", " + box.column + ")");
                 checkFtw(box, blueDiagonalRightLeft);
             }
-            // console.log("Blues: ", $scope.blueRowOne, $scope.blueRowTwo, $scope.blueRowThree, $scope.blueColumnOne,
-            // $scope.blueColumnTwo, $scope.blueColumnThree, $scope.blueDiagonalRightLeft, $scope.blueDiagonalLeftRight);
         }
         // Green Stuff! 
         else if ((count % 3 === 0 || count / 5 === 1 || count / 7 === 1) &&
@@ -137,9 +135,6 @@ app.controller('tttCtrl', function($scope) {
                 greenDiagonalRightLeft.push("(" + box.row + ", " + box.column + ")");
                 checkFtw(box, greenDiagonalRightLeft);
             }
-
-            // console.log("Greens: ", $scope.greenRowOne, $scope.greenRowTwo, $scope.greenRowThree, $scope.greenColumnOne,
-            //     $scope.greenColumnTwo, $scope.greenColumnThree, $scope.greenDiagonalRightLeft, $scope.greenDiagonalLeftRight);
         } else {
             alert("this has been selected"); // Maybe have a dynamically updated prompt.
         }
