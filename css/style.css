@@ -30,6 +30,12 @@
 	background-color: #27ae60;
 }
 
+.banner {
+	float:left;
+	margin: 10px 0 0 100px;
+}
+
+
 input[type="button"] {
 	margin-top: 1rem;
 	margin-right: 5px;
@@ -51,6 +57,7 @@ input[type="button"]:focus {
 	outline: none;
 }
 input[type="button"]:hover {
-	background-color: #497bad;
+	background-color: #D4D4D4;
 	color: white;
 }
+

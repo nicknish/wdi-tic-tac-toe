@@ -143,7 +143,7 @@ app.controller('tttCtrl', function($scope) {
     // Check for a win combination
     var checkFtw = function(box, someArray) {
         if (someArray.length === 3) {
-            alert(box.color + " wins!");
+            // alert(box.color + " wins!");
             // End the game, yo!
         }
     };

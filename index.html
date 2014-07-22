@@ -10,7 +10,8 @@
 	<script src="js/script.js"></script>
 </head>
 <body>
-	<div class="container" ng-controller="tttCtrl">
+	<!-- <div class="banner">Hello, take a moment to relax.</div> -->
+	<div class="container clearfix" ng-controller="tttCtrl">
 		<div ng-class="{ box: true, blue: box.color == 'blue', green: box.color =='green' }" ng-click="isSelected(box)" ng-repeat="box in boxes">
 		</div>
 		<input ng-click="resetGame()" value="reset" type="button">
