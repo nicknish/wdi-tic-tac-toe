@@ -3,139 +3,139 @@ var app = angular.module('TicTacToe', []);
 app.controller('tttCtrl', function($scope) {
 
     // Counter determines player turn
-    $scope.count = 2;
+    var count = 2;
 
     // Blue Variables
-    $scope.blueDiagonalLeftRight = [];
-    $scope.blueDiagonalRightLeft = [];
-    $scope.blueColumnOne = [];
-    $scope.blueColumnTwo = [];
-    $scope.blueColumnThree = [];
-    $scope.blueRowOne = [];
-    $scope.blueRowTwo = [];
-    $scope.blueRowThree = [];
+    var blueDiagonalLeftRight = [],
+        blueDiagonalRightLeft = [],
+        blueColumnOne = [],
+        blueColumnTwo = [],
+        blueColumnThree = [],
+        blueRowOne = [],
+        blueRowTwo = [],
+        blueRowThree = [];
 
     // Green Variables
-    $scope.greenDiagonalLeftRight = [];
-    $scope.greenDiagonalRightLeft = [];
-    $scope.greenColumnOne = [];
-    $scope.greenColumnTwo = [];
-    $scope.greenColumnThree = [];
-    $scope.greenRowOne = [];
-    $scope.greenRowTwo = [];
-    $scope.greenRowThree = [];
+    var greenDiagonalLeftRight = [],
+        greenDiagonalRightLeft = [],
+        greenColumnOne = [],
+        greenColumnTwo = [],
+        greenColumnThree = [],
+        greenRowOne = [],
+        greenRowTwo = [],
+        greenRowThree = [];
 
     $scope.isSelected = function(box) {
 
         // Blue Stuff!
-        if ($scope.count === 11) { // If all the tiles are filled without a winner, then cat's game
+        if (count === 11) { // If all the tiles are filled without a winner, then cat's game
             alert("cat's game!");
-        } else if ($scope.count % 2 === 0 && box.color === "" && box.color != "green") {
+        } else if (count % 2 === 0 && box.color === "" && box.color != "green") {
             box.color = "blue";
-            $scope.count = $scope.count + 1;
+            count = count + 1;
             // Check Row 1
             if ((box.row === 1 && box.column === 1) || (box.row === 1 && box.column === 2) ||
                 (box.row === 1 && box.column === 3)) {
-                $scope.blueRowOne.push("(" + box.row + ", " + box.column + ")");
-                $scope.checkFtw(box, $scope.blueRowOne);
+                blueRowOne.push("(" + box.row + ", " + box.column + ")");
+                checkFtw(box, blueRowOne);
             }
             // Check Row 2
             if ((box.row === 2 && box.column === 1) || (box.row === 2 && box.column === 2) ||
                 (box.row === 2 && box.column === 3)) {
-                $scope.blueRowTwo.push("(" + box.row + ", " + box.column + ")");
-                $scope.checkFtw(box, $scope.blueRowTwo);
+                blueRowTwo.push("(" + box.row + ", " + box.column + ")");
+                checkFtw(box, blueRowTwo);
             }
             // Check Row 3
             if ((box.row === 3 && box.column === 1) || (box.row === 3 && box.column === 2) ||
                 (box.row === 3 && box.column === 3)) {
-                $scope.blueRowThree.push("(" + box.row + ", " + box.column + ")");
-                $scope.checkFtw(box, $scope.blueRowThree);
+                blueRowThree.push("(" + box.row + ", " + box.column + ")");
+                checkFtw(box, blueRowThree);
             }
             // Check Column 1
             if ((box.row === 1 && box.column === 1) || (box.row === 2 && box.column === 1) ||
                 (box.row === 3 && box.column === 1)) {
-                $scope.blueColumnOne.push("(" + box.row + ", " + box.column + ")");
-                $scope.checkFtw(box, $scope.blueColumnOne);
+                blueColumnOne.push("(" + box.row + ", " + box.column + ")");
+                checkFtw(box, blueColumnOne);
             }
             // Check Column 2
             if ((box.row === 1 && box.column === 2) || (box.row === 2 && box.column === 2) ||
                 (box.row === 3 && box.column === 2)) {
-                $scope.blueColumnTwo.push("(" + box.row + ", " + box.column + ")");
-                $scope.checkFtw(box, $scope.blueColumnTwo);
+                blueColumnTwo.push("(" + box.row + ", " + box.column + ")");
+                checkFtw(box, blueColumnTwo);
             }
             // Check Column 3
             if ((box.row === 1 && box.column === 3) || (box.row === 2 && box.column === 3) ||
                 (box.row === 3 && box.column === 3)) {
-                $scope.blueColumnThree.push("(" + box.row + ", " + box.column + ")");
-                $scope.checkFtw(box, $scope.blueColumnThree);
+                blueColumnThree.push("(" + box.row + ", " + box.column + ")");
+                checkFtw(box, blueColumnThree);
             }
             // Check Diagonal Left-to-Right
             if ((box.row === 1 && box.column === 1) || (box.row === 2 && box.column === 2) ||
                 (box.row === 3 && box.column === 3)) {
-                $scope.blueDiagonalLeftRight.push("(" + box.row + ", " + box.column + ")");
-                $scope.checkFtw(box, $scope.blueDiagonalLeftRight);
+                blueDiagonalLeftRight.push("(" + box.row + ", " + box.column + ")");
+                checkFtw(box, blueDiagonalLeftRight);
             }
             // Check Diagonal Right-to-Left
             if ((box.row === 1 && box.column === 3) || (box.row === 2 && box.column === 2) ||
                 (box.row === 3 && box.column === 1)) {
-                $scope.blueDiagonalRightLeft.push("(" + box.row + ", " + box.column + ")");
-                $scope.checkFtw(box, $scope.blueDiagonalRightLeft);
+                blueDiagonalRightLeft.push("(" + box.row + ", " + box.column + ")");
+                checkFtw(box, blueDiagonalRightLeft);
             }
             // console.log("Blues: ", $scope.blueRowOne, $scope.blueRowTwo, $scope.blueRowThree, $scope.blueColumnOne,
             // $scope.blueColumnTwo, $scope.blueColumnThree, $scope.blueDiagonalRightLeft, $scope.blueDiagonalLeftRight);
         }
         // Green Stuff! 
-        else if (($scope.count % 3 === 0 || $scope.count / 5 === 1 || $scope.count / 7 === 1) &&
+        else if ((count % 3 === 0 || count / 5 === 1 || count / 7 === 1) &&
             box.color != "blue" && box.color != "green") {
             box.color = "green";
-            $scope.count = $scope.count + 1;
+            count = count + 1;
             // Check Row 1
             if ((box.row === 1 && box.column === 1) || (box.row === 1 && box.column === 2) ||
                 (box.row === 1 && box.column === 3)) {
-                $scope.greenRowOne.push("(" + box.row + ", " + box.column + ")");
-                $scope.checkFtw(box, $scope.greenRowOne);
+                greenRowOne.push("(" + box.row + ", " + box.column + ")");
+                checkFtw(box, greenRowOne);
             }
             // Check Row 2
             if ((box.row === 2 && box.column === 1) || (box.row === 2 && box.column === 2) ||
                 (box.row === 2 && box.column === 3)) {
-                $scope.greenRowTwo.push("(" + box.row + ", " + box.column + ")");
-                $scope.checkFtw(box, $scope.greenRowTwo);
+                greenRowTwo.push("(" + box.row + ", " + box.column + ")");
+                checkFtw(box, greenRowTwo);
             }
             // Check Row 3
             if ((box.row === 3 && box.column === 1) || (box.row === 3 && box.column === 2) ||
                 (box.row === 3 && box.column === 3)) {
-                $scope.greenRowThree.push("(" + box.row + ", " + box.column + ")");
-                $scope.checkFtw(box, $scope.greenRowThree);
+                greenRowThree.push("(" + box.row + ", " + box.column + ")");
+                checkFtw(box, greenRowThree);
             }
             // Check Column 1
             if ((box.row === 1 && box.column === 1) || (box.row === 2 && box.column === 1) ||
                 (box.row === 3 && box.column === 1)) {
-                $scope.greenColumnOne.push("(" + box.row + ", " + box.column + ")");
-                $scope.checkFtw(box, $scope.greenColumnOne);
+                greenColumnOne.push("(" + box.row + ", " + box.column + ")");
+                checkFtw(box, greenColumnOne);
             }
             // Check Column 2
             if ((box.row === 1 && box.column === 2) || (box.row === 2 && box.column === 2) ||
                 (box.row === 3 && box.column === 2)) {
-                $scope.greenColumnTwo.push("(" + box.row + ", " + box.column + ")");
-                $scope.checkFtw(box, $scope.greenColumnTwo);
+                greenColumnTwo.push("(" + box.row + ", " + box.column + ")");
+                checkFtw(box, greenColumnTwo);
             }
             // Check Column 3
             if ((box.row === 1 && box.column === 3) || (box.row === 2 && box.column === 3) ||
                 (box.row === 3 && box.column === 3)) {
-                $scope.greenColumnThree.push("(" + box.row + ", " + box.column + ")");
-                $scope.checkFtw(box, $scope.greenColumnThree);
+                greenColumnThree.push("(" + box.row + ", " + box.column + ")");
+                checkFtw(box, greenColumnThree);
             }
             // Check Diagonal Left-to-Right
             if ((box.row === 1 && box.column === 1) || (box.row === 2 && box.column === 2) ||
                 (box.row === 3 && box.column === 3)) {
-                $scope.greenDiagonalLeftRight.push("(" + box.row + ", " + box.column + ")");
-                $scope.checkFtw(box, $scope.greenDiagonalLeftRight);
+                greenDiagonalLeftRight.push("(" + box.row + ", " + box.column + ")");
+                checkFtw(box, greenDiagonalLeftRight);
             }
             // Check Diagonal Right-to-Left
             if ((box.row === 1 && box.column === 3) || (box.row === 2 && box.column === 2) ||
                 (box.row === 3 && box.column === 1)) {
-                $scope.greenDiagonalRightLeft.push("(" + box.row + ", " + box.column + ")");
-                $scope.checkFtw(box, $scope.greenDiagonalRightLeft);
+                greenDiagonalRightLeft.push("(" + box.row + ", " + box.column + ")");
+                checkFtw(box, greenDiagonalRightLeft);
             }
 
             // console.log("Greens: ", $scope.greenRowOne, $scope.greenRowTwo, $scope.greenRowThree, $scope.greenColumnOne,
@@ -146,7 +146,7 @@ app.controller('tttCtrl', function($scope) {
     };
 
     // Check for a win combination
-    $scope.checkFtw = function(box, someArray) {
+    var checkFtw = function(box, someArray) {
         if (someArray.length === 3) {
             alert(box.color + " wins!");
             // End the game, yo!
