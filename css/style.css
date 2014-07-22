@@ -6,35 +6,39 @@
 
 .box {
 	background-color: white;
-	width: 100px;
-	height: 100px;
+	width: 6.25rem;
+	height: 6.25rem;
 	border: 1px solid #95a5a6;
 	margin: .35rem;
 	display: inline-block;
 	cursor: pointer;
-	-webkit-transition: background-color .5s ease;
-	-o-transition: background-color .5s ease;
-	transition: background-color .5s ease;
+	-webkit-transition: all .5s ease;
+	-o-transition: all .5s ease;
+	transition: all .5s ease;
 }
+
+.box:hover {
+	border: 1px solid gray;
+}
+
 .container {
-	max-width: 334px;
+	width: 85%;
+	max-width: 20.9rem;
 	margin: 0 auto;
 	margin-top: 10rem;
 }
 
-.blue {
-	background-color: #497bad;
-}
+.blue {	background-color: #497bad; border: none; } 
+.green { background-color: #27ae60; border: none; }
 
-.green {
-	background-color: #27ae60;
-}
-
-.banner {
+/*.banner {
 	float:left;
 	margin: 10px 0 0 100px;
-}
+}*/
 
+/*.question-mark {
+
+}*/
 
 input[type="button"] {
 	margin-top: 1rem;
@@ -53,6 +57,7 @@ input[type="button"] {
 	-o-transition: all 1s ease;
 	transition: all 1s ease;
 }
+
 input[type="button"]:focus {
 	outline: none;
 }
@@ -61,3 +66,6 @@ input[type="button"]:hover {
 	color: white;
 }
 
+@media (max-width: 40rem) {
+	html { font-size: 81%;}
+}
