@@ -153,6 +153,13 @@ app.controller('tttCtrl', function($scope) {
         }
     };
 
+    // Reset Game
+    // $scope.resetGame = function() {
+    //     for (i = 0; i <= $scope.boxes; i++) {
+    //         $scope.boxes[i].color = "";
+    //     }
+    // };
+
     // JavaScript Objects to build out Gameboard
     $scope.boxes = [{
         row: 1,
