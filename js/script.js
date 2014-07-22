@@ -32,7 +32,7 @@ app.controller('tttCtrl', function($scope) {
             alert("cat's game!");
         } else if (count % 2 === 0 && box.color === "" && box.color != "green") {
             box.color = "blue";
-            count = count + 1;
+            count++;
             // Check Row 1
             if ((box.row === 1 && box.column === 1) || (box.row === 1 && box.column === 2) ||
                 (box.row === 1 && box.column === 3)) {
@@ -86,7 +86,7 @@ app.controller('tttCtrl', function($scope) {
         else if ((count % 3 === 0 || count / 5 === 1 || count / 7 === 1) &&
             box.color != "blue" && box.color != "green") {
             box.color = "green";
-            count = count + 1;
+            count++;
             // Check Row 1
             if ((box.row === 1 && box.column === 1) || (box.row === 1 && box.column === 2) ||
                 (box.row === 1 && box.column === 3)) {
@@ -148,12 +148,29 @@ app.controller('tttCtrl', function($scope) {
         }
     };
 
-    // Reset Game
-    // $scope.resetGame = function() {
-    //     for (i = 0; i <= $scope.boxes; i++) {
-    //         $scope.boxes[i].color = "";
-    //     }
-    // };
+    // Reset Game - reset values to default
+    $scope.resetGame = function() {
+        count = 2;
+        blueDiagonalLeftRight.length = 0;
+        blueDiagonalRightLeft.length = 0;
+        blueColumnOne.length = 0;
+        blueColumnTwo.length = 0;
+        blueColumnThree.length = 0;
+        blueRowOne.length = 0;
+        blueRowTwo.length = 0;
+        blueRowThree.length = 0;
+        greenDiagonalLeftRight.length = 0;
+        greenDiagonalRightLeft.length = 0;
+        greenColumnOne.length = 0;
+        greenColumnTwo.length = 0;
+        greenColumnThree.length = 0;
+        greenRowOne.length = 0;
+        greenRowTwo.length = 0;
+        greenRowThree.length = 0;
+        for (i = 0; i < $scope.boxes.length; i++) {
+            $scope.boxes[i].color = "";
+        }
+    };
 
     // JavaScript Objects to build out Gameboard
     $scope.boxes = [{
