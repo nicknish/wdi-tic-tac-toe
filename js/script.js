@@ -1,8 +1,3 @@
-/*==================================
-===THIS IS THE DEVELOPMENT BRANCH===
-==================================*/
-
-
 var app = angular.module('TicTacToe', []);
 
 app.controller('tttCtrl', function($scope) {
@@ -155,6 +150,7 @@ app.controller('tttCtrl', function($scope) {
     var checkFtw = function(box, someArray) {
         if (someArray.length === 3) {
             $scope.bannerText = box.color + " wins!";
+            alert(box.color + " wins!");
             // End the game, yo!
         }
     };
