@@ -22,8 +22,12 @@
 }
 
 .container {
+<<<<<<< HEAD
 	width: 85%;
 	max-width: 20.9rem;
+=======
+	max-width: 40rem;
+>>>>>>> e21185f04d764e03442b79d1368f0aea135b47d1
 	margin: 0 auto;
 	margin-top: 10rem;
 }
@@ -53,6 +57,7 @@ input[type="button"] {
 	text-transform: uppercase;
 	font-size: .7rem;
 	letter-spacing: 1px;
+<<<<<<< HEAD
 	-webkit-transition: all 1s ease;
 	-o-transition: all 1s ease;
 	transition: all 1s ease;
@@ -69,3 +74,10 @@ input[type="button"]:hover {
 @media (max-width: 40rem) {
 	html { font-size: 81%;}
 }
+=======
+}
+
+@media (max-width: 40rem) {
+
+}
+>>>>>>> e21185f04d764e03442b79d1368f0aea135b47d1
