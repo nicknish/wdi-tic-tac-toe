@@ -25,16 +25,20 @@
 	width: 85%;
 	max-width: 20.9rem;
 	margin: 0 auto;
-	margin-top: 10rem;
+	margin-top: 5rem;
 }
 
 .blue {	background-color: #497bad; border: none; } 
 .green { background-color: #27ae60; border: none; }
 
-/*.banner {
-	float:left;
-	margin: 10px 0 0 100px;
-}*/
+.banner {
+		text-align: center; 
+		font-size: 1.5rem;
+		margin-bottom: 3.5rem;
+		color: #d4d4d4;
+		letter-spacing: 2px;
+		text-align: center;
+}
 
 /*.question-mark {
 
