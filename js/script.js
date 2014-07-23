@@ -11,7 +11,7 @@ app.controller('tttCtrl', function($scope) {
     var count = 2;
 
     // Sweet Dynamic Banner
-    $scope.bannerText = "Take a moment to relax."
+    $scope.bannerText = "Take a moment to relax.";
 
     // Blue Variables
     var blueDiagonalLeftRight = [],
@@ -155,7 +155,7 @@ app.controller('tttCtrl', function($scope) {
     var checkFtw = function(box, someArray) {
         if (someArray.length === 3) {
             $scope.bannerText = box.color + " wins!";
-            // End the game, yo!
+            $scope.isSelected.off();
         }
     };
 
