@@ -4,6 +4,7 @@ app.controller('tttCtrl', function($scope) {
 
     // Counter determines player turn
     var count = 2;
+    $scope.bannerText = "Take a moment to relax."
 
     // Blue Variables
     var blueDiagonalLeftRight = [],
@@ -29,10 +30,11 @@ app.controller('tttCtrl', function($scope) {
 
         // Blue Stuff!
         if (count === 11) { // If all the tiles are filled without a winner, then cat's game
-            alert("cat's game!");
+            $scope.bannerText = "cat's game!";
         } else if (count % 2 === 0 && box.color === "" && box.color != "green") {
             box.color = "blue";
             count++;
+            $scope.bannerText = "green's turn";
             // Check Row 1
             if ((box.row === 1 && box.column === 1) || (box.row === 1 && box.column === 2) ||
                 (box.row === 1 && box.column === 3)) {
@@ -87,6 +89,7 @@ app.controller('tttCtrl', function($scope) {
             box.color != "blue" && box.color != "green") {
             box.color = "green";
             count++;
+            $scope.bannerText = "blue's turn";
             // Check Row 1
             if ((box.row === 1 && box.column === 1) || (box.row === 1 && box.column === 2) ||
                 (box.row === 1 && box.column === 3)) {
@@ -136,20 +139,21 @@ app.controller('tttCtrl', function($scope) {
                 checkFtw(box, greenDiagonalRightLeft);
             }
         } else {
-            alert("this has been selected"); // Maybe have a dynamically updated prompt.
+            $scope.bannerText = "this has been selected"; // Maybe have a dynamically updated prompt.
         }
     };
 
     // Check for a win combination
     var checkFtw = function(box, someArray) {
         if (someArray.length === 3) {
-            // alert(box.color + " wins!");
+            $scope.bannerText = box.color + " wins!";
             // End the game, yo!
         }
     };
 
     // Reset Game - reset values to default
     $scope.resetGame = function() {
+        $scope.bannerText = "Game reset.";
         count = 2;
         blueDiagonalLeftRight.length = 0;
         blueDiagonalRightLeft.length = 0;
