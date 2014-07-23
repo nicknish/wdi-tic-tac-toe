@@ -4,6 +4,8 @@ app.controller('tttCtrl', function($scope) {
 
     // Counter determines player turn
     var count = 2;
+
+    // Sweet Dynamic Banner
     $scope.bannerText = "Take a moment to relax."
 
     // Blue Variables
@@ -26,6 +28,7 @@ app.controller('tttCtrl', function($scope) {
         greenRowTwo = [],
         greenRowThree = [];
 
+    // Selection Function, Passing in individual box object
     $scope.isSelected = function(box) {
 
         // Blue Stuff!
@@ -143,7 +146,7 @@ app.controller('tttCtrl', function($scope) {
         }
     };
 
-    // Check for a win combination
+    // Check for a win combo by length of individual row/col/diag array
     var checkFtw = function(box, someArray) {
         if (someArray.length === 3) {
             $scope.bannerText = box.color + " wins!";
