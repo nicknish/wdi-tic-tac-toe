@@ -1,12 +1,12 @@
-var app = angular.module('TicTacToe', []);
+var app = angular.module('TicTacToe', ["firebase"]);
 
-app.controller('tttCtrl', function($scope) {
+app.controller('tttCtrl', function($scope, $firebase) {
 
     // Counter determines player turn
     var count = 2;
 
     // Sweet Dynamic Banner
-    $scope.bannerText = "Take a moment to relax."
+    $scope.bannerText = "Take a moment to relax.";
 
     // Blue Variables
     var blueDiagonalLeftRight = [],
@@ -146,7 +146,7 @@ app.controller('tttCtrl', function($scope) {
         }
     };
 
-    // Check for a win combo by length of individual row/col/diag array
+    // Check for a win combo by length row/col/diag array
     var checkFtw = function(box, someArray) {
         if (someArray.length === 3) {
             $scope.bannerText = box.color + " wins!";
@@ -175,6 +175,7 @@ app.controller('tttCtrl', function($scope) {
         greenRowOne.length = 0;
         greenRowTwo.length = 0;
         greenRowThree.length = 0;
+        // Overwrite the color property on each box
         for (i = 0; i < $scope.boxes.length; i++) {
             $scope.boxes[i].color = "";
         }
