@@ -2,6 +2,14 @@ var TicTacToe = angular.module('TicTacToe', ["firebase"]);
 
 TicTacToe.controller('tttCtrl', function($scope, $firebase) {
 
+    // Firebase Stuff
+    var TicTacToeRef = new Firebase("https://wdi-ttt.firebaseIO.com/");
+    $scope.remoteBoxList = $firebase(new Firebase("https://wdi-ttt.firebaseIO.com/" + '/remoteBoxList'));
+    $scope.$watch("boxList", function() {
+        console.log("Stuff changes!");
+    });
+
+
     // Counter determines player turn
     var count = 2;
 
@@ -155,42 +163,8 @@ TicTacToe.controller('tttCtrl', function($scope, $firebase) {
         }
     };
 
-    // Reset Game - reset values to default
-    $scope.resetGame = function() {
-        $scope.bannerText = "Game reset.";
-        count = 2;
-        blueDiagonalLeftRight.length = 0;
-        blueDiagonalRightLeft.length = 0;
-        blueColumnOne.length = 0;
-        blueColumnTwo.length = 0;
-        blueColumnThree.length = 0;
-        blueRowOne.length = 0;
-        blueRowTwo.length = 0;
-        blueRowThree.length = 0;
-        greenDiagonalLeftRight.length = 0;
-        greenDiagonalRightLeft.length = 0;
-        greenColumnOne.length = 0;
-        greenColumnTwo.length = 0;
-        greenColumnThree.length = 0;
-        greenRowOne.length = 0;
-        greenRowTwo.length = 0;
-        greenRowThree.length = 0;
-        // Overwrite the color property on each box
-        for (i = 0; i < $scope.boxes.length; i++) {
-            $scope.boxes[i].color = "";
-        }
-    };
-
-    $scope.remoteBoxList = $firebase(new Firebase("https://wdi-ttt.firebaseIO.com/" + '/remoteBoxList'));
-
-    $scope.remoteBoxList.$bind($scope, "boxList");
-
-    $scope.$watch("boxList", function() {
-        console.log("Stuff changes!");
-    });
-
     // JavaScript Objects to build out Gameboard
-    $scope.boxes = [{
+    $scope.boxList = [{
         row: 1,
         column: 1,
         color: ""
@@ -228,4 +202,39 @@ TicTacToe.controller('tttCtrl', function($scope, $firebase) {
         color: ""
     }];
 
+    $scope.remoteBoxList.$bind($scope, "boxList"); //critical firebase stuff
+
+    // Reset Game - reset values to default
+    $scope.resetGame = function() {
+        $scope.bannerText = "Game reset.";
+        count = 2;
+        blueDiagonalLeftRight.length = 0;
+        blueDiagonalRightLeft.length = 0;
+        blueColumnOne.length = 0;
+        blueColumnTwo.length = 0;
+        blueColumnThree.length = 0;
+        blueRowOne.length = 0;
+        blueRowTwo.length = 0;
+        blueRowThree.length = 0;
+        greenDiagonalLeftRight.length = 0;
+        greenDiagonalRightLeft.length = 0;
+        greenColumnOne.length = 0;
+        greenColumnTwo.length = 0;
+        greenColumnThree.length = 0;
+        greenRowOne.length = 0;
+        greenRowTwo.length = 0;
+        greenRowThree.length = 0;
+        console.log("am i working?");
+        // Overwrite the color property on each box
+        for (i = 0; i < $scope.boxList.length; i++) {
+            $scope.boxList[i].color = "";
+        }
+    };
+
 });
+
+// Firechat
+
+// var chatRef = new Firebase('https://wdi-ttt.firebaseio.com/chat');
+// var chat = new FirechatUI(chatRef, document.getElementById("firechat-wrapper"));
+// chat.setUser('<user-id>', '<display-name>');
