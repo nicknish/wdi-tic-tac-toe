@@ -5,10 +5,6 @@ TicTacToe.controller('tttCtrl', function($scope, $firebase) {
     // Firebase Stuff
     var TicTacToeRef = new Firebase("https://wdi-ttt.firebaseIO.com/");
     $scope.remoteBoxList = $firebase(new Firebase("https://wdi-ttt.firebaseIO.com/" + '/remoteBoxList'));
-    $scope.$watch("boxList", function() {
-        console.log("Stuff changes!");
-    });
-
 
     // Counter determines player turn
     var count = 2;
@@ -204,6 +200,10 @@ TicTacToe.controller('tttCtrl', function($scope, $firebase) {
 
     $scope.remoteBoxList.$bind($scope, "boxList"); //critical firebase stuff
 
+    $scope.$watch("boxList", function() { // more critical firebase stuff
+        console.log("Stuff changes!");
+    });
+
     // Reset Game - reset values to default
     $scope.resetGame = function() {
         $scope.bannerText = "Game reset.";
@@ -231,6 +231,47 @@ TicTacToe.controller('tttCtrl', function($scope, $firebase) {
         }
     };
 
+});
+
+TicTacToe.controller('chatCtrl', function($scope, $firebase) {
+
+    $scope.chatList = [];
+    var chatArea = document.getElementById('chat-area');
+    $scope.wantsToTalk = false;
+
+    // Add a comment to the chatbox.
+    $scope.sayHi = function() {
+        chatArea.scrollTop = chatArea.scrollHeight;
+        if ($scope.text) {
+            $scope.chatList.push(this.text);
+            console.log($scope.chatList);
+            $scope.text = "";
+        }
+    }
+
+    $scope.turnOnChat = function() {
+        $scope.wantsToTalk = true;
+        console.log("wantsToTalk is true");
+    }
+    $scope.turnOffChat = function() {
+        $scope.wantsToTalk = false;
+        console.log("wantsToTalk is false");
+        $scope.text = "";
+    }
+});
+
+// Detect when enter is pressed
+TicTacToe.directive('ngEnter', function() {
+    return function(scope, element, attrs) {
+        element.bind("keydown keypress", function(event) {
+            if (event.which === 13) {
+                scope.$apply(function() {
+                    scope.$eval(attrs.ngEnter);
+                });
+                event.preventDefault();
+            }
+        });
+    }
 });
 
 // Firechat

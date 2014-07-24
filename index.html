@@ -6,21 +6,36 @@
 	<title>Tic Tac Toe</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css">
 	<link rel="stylesheet" href="css/style.css">
-	<!-- <link rel="stylesheet" href="../firechat-master/dist/0.1.5/firechat-default.css"> -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
-	<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script -->
-	<script src="https://cdn.firebase.com/js/client/1.0.17/firebase.js"></script>
+ 	<script src="https://cdn.firebase.com/js/client/1.0.17/firebase.js"></script>
 	<script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js"></script>
-	<!-- <script src="../firechat-master/dist/0.1.5/firechat-default.js"></script> -->
 	<script src="js/script.js"></script>
 </head>
 <body>
+
 	<!-- <div id="question-mark">?</div> -->
+
+	<!-- Tic Tac Toe Game -->
+
 	<div class="container" ng-controller="tttCtrl" ng-model="boxList">
 		<div class="banner">{{bannerText}}</div>
 		<div ng-class="{ box: true, blue: box.color == 'blue', green: box.color =='green' }" ng-click="isSelected(box)" ng-repeat="box in boxList"></div>
 		<!-- <input ng-click="resetGame()" value="reset" type="button" id="reset-button"> -->
 	</div>
-	<!-- <div id="firechat-wrapper"></div> -->
+
+	<!-- Chat Widget -->
+
+
+		<div class="chat-widget container" ng-controller="chatCtrl">
+			<div ng-class="{ chatarea: true, collapsed: wantsToTalk === false, expanded: wantsToTalk === true }" id="chat-area">
+				<div class="responses" ng-repeat="item in chatList track by $index">
+					<p>{{item}}</p>
+				</div>
+			</div>
+			<input id="chat-input" type="text" ng-enter="sayHi()" ng-model="text" placeholder="say hello" ng-click="turnOnChat()">
+			<a href="#" ng-show="wantsToTalk" ng-click="turnOffChat()">hide</a>
+		</div>
+		
+
 </body>
 </html>
