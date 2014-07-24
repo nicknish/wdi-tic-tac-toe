@@ -82,30 +82,37 @@
 	word-wrap: break-word;
 	margin: 5px;
 	color: #333;
+	line-height: 96.5%;
 }
 #chat-input {
 	z-index: 1;
 	position: relative;
 	bottom: 0;
-	width: 200px;
+	width: 100%;
 	padding: 10px;
 	font-size: 0.8rem;
 	border-top: 1px solid rgba(0,0,0,.1);
 	border-bottom: none;
 	border-right: none;
-	/*float:left;*/
+	border-left: 2px solid #c0392b;
 }
 #chat-input:focus {
 	outline: none;
 }
 
 .collapsed {
+	-webkit-transition: all 1s ease;
+	-o-transition: all 1s ease;
+	transition: all 1s ease;
 	width: 0;
 	height: 0;
 	overflow: hidden;
 }
 
 .expanded {
+	-webkit-transition: all 1s ease;
+	-o-transition: all 1s ease;
+	transition: all 1s ease;
 	width: 200px;
 	height: 150px;
 	padding: 5px 5px 30px 5px;
@@ -116,14 +123,30 @@
 	color: rgba(0,0,0,.5);
 	font-size: 0.6rem;
 	float: right;
-	margin-top: -2px;
 	padding: 8px;
+	/*margin-top: -20px;*/
+	margin-top: -2px;
 	z-index: 5;
 	display: inline-block;
 	border-bottom-left-radius: 20%;
 	border-bottom-right-radius: 20%;
 	box-shadow: 1px 0 5px rgba(0,0,0,0.3);
+	-webkit-transition: all 1s ease;
+	-o-transition: all 1s ease;
+	transition: all 1s ease;
 }
+
+/*.pullout {
+	margin-top: -2px;
+}*/
+
+/* Fix the show/hide feature 
+		Add transitions to slide it up and down
+		Also, fix width issues at >40rem
+*/
+
+
+
 
 /* Media Queries 
 ================== */
@@ -132,8 +155,11 @@
 	html { font-size: 81%;}
 	.chat-widget {
 		margin-top: 3rem;
-		max-width: 200px;
+		max-width: 204px;
 		position: inherit;
+	}
+	#chat-input {
+		width: 204px;
 	}
 
 }

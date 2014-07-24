@@ -233,6 +233,9 @@ TicTacToe.controller('tttCtrl', function($scope, $firebase) {
 
 });
 
+
+// Chatbox
+
 TicTacToe.controller('chatCtrl', function($scope, $firebase) {
 
     $scope.chatList = [];

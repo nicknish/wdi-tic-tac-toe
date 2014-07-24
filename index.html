@@ -33,7 +33,7 @@
 				</div>
 			</div>
 			<input id="chat-input" type="text" ng-enter="sayHi()" ng-model="text" placeholder="say hello" ng-click="turnOnChat()">
-			<a href="#" ng-show="wantsToTalk" ng-click="turnOffChat()">hide</a>
+			<a href="#" ng-class="{pullout: wantsToTalk === true}" ng-show="wantsToTalk" ng-click="turnOffChat()">hide</a>
 		</div>
 		
 
