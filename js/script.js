@@ -1,6 +1,6 @@
-var app = angular.module('TicTacToe', ["firebase"]);
+var TicTacToe = angular.module('TicTacToe', ["firebase"]);
 
-app.controller('tttCtrl', function($scope, $firebase) {
+TicTacToe.controller('tttCtrl', function($scope, $firebase) {
 
     // Counter determines player turn
     var count = 2;
@@ -180,6 +180,14 @@ app.controller('tttCtrl', function($scope, $firebase) {
             $scope.boxes[i].color = "";
         }
     };
+
+    $scope.remoteBoxList = $firebase(new Firebase("https://wdi-ttt.firebaseIO.com/" + '/remoteBoxList'));
+
+    $scope.remoteBoxList.$bind($scope, "boxList");
+
+    $scope.$watch("boxList", function() {
+        console.log("Stuff changes!");
+    });
 
     // JavaScript Objects to build out Gameboard
     $scope.boxes = [{

@@ -14,9 +14,9 @@
 <body>
 <div class="test">
 	<!-- <div id="question-mark">?</div> -->
-	<div class="container" ng-controller="tttCtrl">
-		<div class="banner" ng-bin>{{bannerText}}</div>
-		<div ng-class="{ box: true, blue: box.color == 'blue', green: box.color =='green' }" ng-click="isSelected(box)" ng-repeat="box in boxes"></div>
+	<div class="container" ng-controller="tttCtrl" ng-model="boxList">
+		<div class="banner">{{bannerText}}</div>
+		<div ng-class="{ box: true, blue: box.color == 'blue', green: box.color =='green' }" ng-click="isSelected(box)" ng-repeat="box in boxList"></div>
 		<input ng-click="resetGame()" value="reset" type="button" id="reset-button">
 	</div>
 </div>
