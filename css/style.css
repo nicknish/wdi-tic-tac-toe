@@ -83,8 +83,9 @@
 .chatarea p {
 	word-wrap: break-word;
 	margin: 5px;
+	margin-bottom: 10px;
 	color: #555;
-	line-height: 96.5%;
+	line-height: 100%;
 	font-size: .8rem;
 }
 #chat-input {

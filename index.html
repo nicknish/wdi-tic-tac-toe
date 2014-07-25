@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css">
 	<link rel="stylesheet" href="css/style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
- 	<script src="https://cdn.firebase.com/js/client/1.0.17/firebase.js"></script>
+	<script src="https://cdn.firebase.com/js/client/1.0.18/firebase.js"></script>
 	<script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js"></script>
 	<script src="js/script.js"></script>
 </head>
@@ -26,13 +26,13 @@
 	<!-- Chat Widget -->
 
 
-		<div class="chat-widget container" ng-controller="chatCtrl">
+		<div class="chat-widget container" ng-controller="chatCtrl" ng-model="chatList">
 			<div ng-class="{ chatarea: true, collapsed: wantsToTalk === false, expanded: wantsToTalk === true }" id="chat-area">
 				<div class="responses" ng-repeat="item in chatList track by $index">
 					<p>{{item}}</p>
 				</div>
 			</div>
-			<input id="chat-input" type="text" ng-enter="sayHi()" ng-model="text" placeholder="say hello" ng-click="turnOnChat()">
+			<input id="chat-input" type="text" ng-enter="sendMessage()" ng-model="text" placeholder="say hello" ng-click="turnOnChat()">
 			<a href ng-class="{pullout: wantsToTalk === true}" ng-show="wantsToTalk" ng-click="turnOffChat()">hide</a>
 		</div>
 		

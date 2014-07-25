@@ -241,9 +241,16 @@ TicTacToe.controller('chatCtrl', function($scope, $firebase) {
     $scope.chatList = [];
     var chatArea = document.getElementById('chat-area');
     $scope.wantsToTalk = false;
+    $scope.remoteChatList = $firebase(new Firebase("https://wdi-ttt.firebaseIO.com/" + '/remoteChatList'));
+
+    $scope.remoteChatList.$bind($scope, "chatList"); //critical firebase stuff
+
+    $scope.$watch("chatList", function() { // more critical firebase stuff
+        console.log("Chatbox updated!!");
+    });
 
     // Add a comment to the chatbox.
-    $scope.sayHi = function() {
+    $scope.sendMessage = function() {
         chatArea.scrollTop = chatArea.scrollHeight;
         if ($scope.text) {
             $scope.chatList.push(this.text);
