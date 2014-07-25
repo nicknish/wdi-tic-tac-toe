@@ -42,7 +42,8 @@
 #reset-button {
 	margin-top: 1rem;
 	margin-right: 5px;
-	float:right;
+	position: relative;
+	left: 229px;
 	padding: 8px;
 	width: 100px;
 	border-radius: 5px;
@@ -67,28 +68,30 @@
 =================== */
 
 .chat-widget {
-	position: absolute;
 	z-index: 3;
+	margin: 3rem auto 3rem auto;
 	overflow: none;
-	/*right: 0;*/
+	background-color: white;
 	box-shadow: 1px 0 5px rgba(0,0,0,0.3);
 }
 .chatarea {
 	z-index: -99;
+	margin: 0;
 	overflow:scroll;
 	word-wrap: break-word;
 }
 .chatarea p {
 	word-wrap: break-word;
 	margin: 5px;
-	color: #333;
+	color: #555;
 	line-height: 96.5%;
+	font-size: .8rem;
 }
 #chat-input {
-	z-index: 1;
+	z-index: 3;
 	position: relative;
 	bottom: 0;
-	width: 100%;
+	width: 98.8%;
 	padding: 10px;
 	font-size: 0.8rem;
 	border-top: 1px solid rgba(0,0,0,.1);
@@ -96,6 +99,7 @@
 	border-right: none;
 	border-left: 2px solid #c0392b;
 }
+
 #chat-input:focus {
 	outline: none;
 }
@@ -113,32 +117,36 @@
 	-webkit-transition: all 1s ease;
 	-o-transition: all 1s ease;
 	transition: all 1s ease;
-	width: 200px;
+	width: 100%;
 	height: 150px;
-	padding: 5px 5px 30px 5px;
+	padding: 10px 10px 30px 10px;
 }
 
 .chat-widget a {
+	position: relative;
 	text-decoration: none;
 	color: rgba(0,0,0,.5);
 	font-size: 0.6rem;
 	float: right;
 	padding: 8px;
-	/*margin-top: -20px;*/
-	margin-top: -2px;
-	z-index: 5;
+	margin-top: -26px;
+	/*margin-top: -1px;*/
+	z-index: 2;
 	display: inline-block;
 	border-bottom-left-radius: 20%;
 	border-bottom-right-radius: 20%;
-	box-shadow: 1px 0 5px rgba(0,0,0,0.3);
+}
+
+a.pullout {
 	-webkit-transition: all 1s ease;
 	-o-transition: all 1s ease;
 	transition: all 1s ease;
+	-webkit-animation-delay: 1s;
+	-o-animation-delay: 1s;
+	animation-delay: 1s;
+	box-shadow: 1px 2.5px 5px rgba(0,0,0,0.3);
+	margin-top: -1px;
 }
-
-/*.pullout {
-	margin-top: -2px;
-}*/
 
 /* Fix the show/hide feature 
 		Add transitions to slide it up and down
@@ -153,13 +161,17 @@
 
 @media (max-width: 40rem) {
 	html { font-size: 81%;}
+	#reset-button { left: 165px;}
 	.chat-widget {
 		margin-top: 3rem;
 		max-width: 204px;
 		position: inherit;
 	}
+	.chatarea {
+		width: 100%;
+	}
 	#chat-input {
-		width: 204px;
+		width: 200px;
 	}
 
 }
