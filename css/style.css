@@ -24,7 +24,7 @@
 	transition: all .5s ease;
 }
 
-.box:hover { border: 1px solid gray; }
+.box:hover { border: 1px solid rgba(0,0,0,.65); }
 
 .blue {	background-color: #497bad; border: none; } 
 .green { background-color: #27ae60; border: none; }

@@ -7,7 +7,7 @@ TicTacToe.controller('tttCtrl', function($scope, $firebase) {
     $scope.remoteBoxList = $firebase(new Firebase("https://wdi-ttt.firebaseIO.com/" + '/remoteBoxList'));
 
     // Counter determines player turn
-    var count = 2;
+    var count = 2; // Make this a watched variable by firebase?
 
     // Sweet Dynamic Banner
     $scope.bannerText = "Take a moment to relax.";
@@ -243,7 +243,7 @@ TicTacToe.controller('chatCtrl', function($scope, $firebase) {
     $scope.wantsToTalk = false;
     $scope.remoteChatList = $firebase(new Firebase("https://wdi-ttt.firebaseIO.com/" + '/remoteChatList'));
 
-    $scope.remoteChatList.$bind($scope, "chatList"); //critical firebase stuff
+    // $scope.remoteChatList.$bind($scope, "chatList"); //critical firebase stuff
 
     $scope.$watch("chatList", function() { // more critical firebase stuff
         console.log("Chatbox updated!!");
@@ -251,23 +251,23 @@ TicTacToe.controller('chatCtrl', function($scope, $firebase) {
 
     // Add a comment to the chatbox.
     $scope.sendMessage = function() {
-        chatArea.scrollTop = chatArea.scrollHeight;
         if ($scope.text) {
             $scope.chatList.push(this.text);
             console.log($scope.chatList);
-            $scope.text = "";
+        } else {
+            console.log("Nothing was entered!");
         }
-    }
+        chatArea.scrollTop = chatArea.scrollHeight;
+        $scope.text = "";
+    };
 
     $scope.turnOnChat = function() {
         $scope.wantsToTalk = true;
-        console.log("wantsToTalk is true");
-    }
+    };
     $scope.turnOffChat = function() {
         $scope.wantsToTalk = false;
-        console.log("wantsToTalk is false");
         $scope.text = "";
-    }
+    };
 });
 
 // Detect when enter is pressed
