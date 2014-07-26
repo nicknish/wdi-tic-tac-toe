@@ -226,15 +226,17 @@ TicTacToe.controller('tttCtrl', function($scope, $firebase) {
         greenRowThree.length = 0;
         console.log("am i working?");
         // Overwrite the color property on each box
-        for (i = 0; i < $scope.boxList.length; i++) {
+        for (i = 0; i < $scope.remoteBoxList.length; i++) {
             $scope.boxList[i].color = "";
+            console.log("SUP BRO?");
         }
     };
 
 });
 
 
-// Chatbox
+/* Chat Widget
+====================== */
 
 TicTacToe.controller('chatCtrl', function($scope, $firebase) {
 
