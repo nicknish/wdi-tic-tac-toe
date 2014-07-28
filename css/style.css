@@ -142,12 +142,6 @@ a.pullout {
 	margin-top: -1px;
 }
 
-/* Fix the show/hide feature 
-		Add transitions to slide it up and down
-		Also, fix width issues at >40rem
-*/
-
-
 
 
 /* Media Queries 
@@ -155,7 +149,7 @@ a.pullout {
 
 @media (max-width: 40rem) {
 	html { font-size: 81%;}
-	#reset-button { left: 165px;}
+	#reset-button { left: 185px;}
 	.chat-widget {
 		margin-top: 3rem;
 		max-width: 200px;

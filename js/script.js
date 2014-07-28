@@ -1,10 +1,5 @@
 var TicTacToe = angular.module('TicTacToe', ["firebase"]);
 
-// 1. Fix win with Firebase.
-// 2. When I use the reset button it isn't
-//    actually emptying the win arrays on the other browser
-
-
 /* Tic Tac Toe Game
 ======================= */
 TicTacToe.controller('tttCtrl', function($scope, $firebase) {
@@ -225,7 +220,6 @@ TicTacToe.controller('tttCtrl', function($scope, $firebase) {
         // Overwrite the color property on each box
         for (i = 0; i < $scope.gameContainer.boxList.length; i++) {
             $scope.gameContainer.boxList[i].color = "";
-            console.log("Boxes Reset");
         }
     };
 
@@ -235,22 +229,22 @@ TicTacToe.controller('tttCtrl', function($scope, $firebase) {
         boxList: $scope.boxList,
         counter: $scope.count,
         bannerText: $scope.bannerText,
-        blueDiagonalLeftRight: blueDiagonalLeftRight,
-        blueDiagonalRightLeft: blueDiagonalRightLeft,
-        blueColumnOne: blueColumnOne,
-        blueColumnTwo: blueColumnTwo,
-        blueColumnThree: blueColumnThree,
-        blueRowOne: blueRowOne,
-        blueRowTwo: blueRowTwo,
-        blueRowThree: blueRowThree,
-        greenDiagonalLeftRight: greenDiagonalLeftRight,
-        greenDiagonalRightLeft: greenDiagonalRightLeft,
-        greenColumnOne: greenColumnOne,
-        greenColumnTwo: greenColumnTwo,
-        greenColumnThree: greenColumnThree,
-        greenRowOne: greenRowOne,
-        greenRowTwo: greenRowTwo,
-        greenRowThree: greenRowThree
+        // blueDiagonalLeftRight: $scope.blueDiagonalLeftRight,
+        // blueDiagonalRightLeft: $scope.blueDiagonalRightLeft,
+        // blueColumnOne: $scope.blueColumnOne,
+        // blueColumnTwo: $scope.blueColumnTwo,
+        // blueColumnThree: $scope.blueColumnThree,
+        // blueRowOne: $scope.blueRowOne,
+        // blueRowTwo: $scope.blueRowTwo,
+        // blueRowThree: $scope.blueRowThree,
+        // greenDiagonalLeftRight: $scope.greenDiagonalLeftRight,
+        // greenDiagonalRightLeft: $scope.greenDiagonalRightLeft,
+        // greenColumnOne: $scope.greenColumnOne,
+        // greenColumnTwo: $scope.greenColumnTwo,
+        // greenColumnThree: $scope.greenColumnThree,
+        // greenRowOne: $scope.greenRowOne,
+        // greenRowTwo: $scope.greenRowTwo,
+        // greenRowThree: $scope.greenRowThree
     };
     $scope.remoteGameContainer =
         $firebase(new Firebase("https://wdi-ttt.firebaseIO.com/" + 'remoteGameContainer'));
@@ -267,7 +261,7 @@ TicTacToe.controller('tttCtrl', function($scope, $firebase) {
 
 TicTacToe.controller('chatCtrl', function($scope, $firebase) {
 
-    // Ng-repeat isn't working without some index differentiating
+    // ng-repeat isn't working without some index differentiating
     // each array item even with track $index. Using empty string.
     $scope.chatList = [""];
     var chatArea = document.getElementById('chat-area');
