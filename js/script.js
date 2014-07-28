@@ -1,9 +1,8 @@
 var TicTacToe = angular.module('TicTacToe', ["firebase"]);
 
 // 1. Fix win with Firebase.
-// 2. Hook up chat-widget with Firebase.
-// 3. Fix counter with Firebase.
-// 4. Hook up Banner with Firebase.
+// 2. When I use the reset button it isn't
+//    actually emptying the win arrays on the other browser
 
 
 /* Tic Tac Toe Game
@@ -12,11 +11,6 @@ TicTacToe.controller('tttCtrl', function($scope, $firebase) {
 
     // Counter determines player turn
     $scope.count = 2;
-
-    $scope.doClick = function() {
-        $scope.gameContainer.counter++;
-        $scope.count++;
-    }
 
     // Sweet Dynamic Banner
     $scope.bannerText = "Take a moment to relax.";
@@ -273,14 +267,18 @@ TicTacToe.controller('tttCtrl', function($scope, $firebase) {
 
 TicTacToe.controller('chatCtrl', function($scope, $firebase) {
 
-    $scope.chatList = [];
+    // Ng-repeat isn't working without some index differentiating
+    // each array item even with track $index. Using empty string.
+    $scope.chatList = [""];
     var chatArea = document.getElementById('chat-area');
+
+    // Determines whether chat pane shows or not.
     $scope.wantsToTalk = false;
 
     // Add a comment to the chatbox.
     $scope.sendMessage = function() {
         if ($scope.text) {
-            $scope.chatList.push(this.text);
+            $scope.chatListContainer.chatList.push(this.text);
             console.log($scope.chatList);
         } else {
             console.log("Nothing was entered!");

@@ -36,8 +36,6 @@
 		letter-spacing: 2px;
 }
 
-/*#question-mark { }*/
-
 #reset-button {
 	margin-top: 1rem;
 	margin-right: .3125rem;
@@ -84,7 +82,7 @@
 	word-wrap: break-word;
 	margin: .3125rem;
 	margin-bottom: .625rem;
-	line-height: 100%;
+	line-height: 120%;
 	font-size: .8rem;
 }
 #chat-input {
