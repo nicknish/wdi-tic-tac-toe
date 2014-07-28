@@ -16,13 +16,13 @@
 	<!-- Tic Tac Toe Game -->
 
 	<div class="container" ng-controller="tttCtrl" ng-model="gameContainer">
-		<div class="banner">{{bannerText}}</div>
+		<div class="banner">{{gameContainer.bannerText}}</div>
 		<div ng-class="{ box: true, blue: box.color == 'blue', green: box.color =='green' }" ng-click="isSelected(box)" ng-repeat="box in gameContainer.boxList"></div>
 		<input ng-click="resetGame()" value="reset" type="button" id="reset-button">
+		<!-- <h1 ng-click="doClick()">{{gameContainer.counter}} vs. {{count}}</h1> -->
 	</div>
 
 	<!-- Chat Widget -->
-
 
 		<div class="chat-widget container" ng-controller="chatCtrl" ng-model="chatListContainer">
 			<div ng-class="{ chatarea: true, collapsed: wantsToTalk === false, expanded: wantsToTalk === true }" id="chat-area">

@@ -1,11 +1,22 @@
 var TicTacToe = angular.module('TicTacToe', ["firebase"]);
 
+// 1. Fix win with Firebase.
+// 2. Hook up chat-widget with Firebase.
+// 3. Fix counter with Firebase.
+// 4. Hook up Banner with Firebase.
+
+
 /* Tic Tac Toe Game
 ======================= */
 TicTacToe.controller('tttCtrl', function($scope, $firebase) {
 
     // Counter determines player turn
     $scope.count = 2;
+
+    $scope.doClick = function() {
+        $scope.gameContainer.counter++;
+        $scope.count++;
+    }
 
     // Sweet Dynamic Banner
     $scope.bannerText = "Take a moment to relax.";
@@ -34,12 +45,12 @@ TicTacToe.controller('tttCtrl', function($scope, $firebase) {
     $scope.isSelected = function(box) {
 
         // Blue Stuff!
-        if ($scope.count === 11) { // If all the tiles are filled without a winner, then cat's game
+        if ($scope.gameContainer.counter === 11) { // If all the tiles are filled without a winner, then cat's game
             $scope.bannerText = "cat's game!";
-        } else if ($scope.count % 2 === 0 && box.color === "" && box.color != "green") {
+        } else if ($scope.gameContainer.counter % 2 === 0 && box.color === "" && box.color != "green") {
             box.color = "blue";
-            $scope.count++;
-            $scope.bannerText = "green's turn";
+            $scope.gameContainer.counter++;
+            $scope.gameContainer.bannerText = "green's turn";
             // Check Row 1
             if ((box.row === 1 && box.column === 1) || (box.row === 1 && box.column === 2) ||
                 (box.row === 1 && box.column === 3)) {
@@ -90,11 +101,12 @@ TicTacToe.controller('tttCtrl', function($scope, $firebase) {
             }
         }
         // Green Stuff! 
-        else if (($scope.count % 3 === 0 || $scope.count / 5 === 1 || $scope.count / 7 === 1) &&
+        else if (($scope.gameContainer.counter % 3 === 0 || $scope.gameContainer.counter / 5 === 1 || $scope.gameContainer.counter / 7 === 1) &&
             box.color != "blue" && box.color != "green") {
             box.color = "green";
-            $scope.count++;
-            $scope.bannerText = "blue's turn";
+            $scope.gameContainer.counter++;
+            console.log($scope.gameContainer.counter);
+            $scope.gameContainer.bannerText = "blue's turn";
             // Check Row 1
             if ((box.row === 1 && box.column === 1) || (box.row === 1 && box.column === 2) ||
                 (box.row === 1 && box.column === 3)) {
@@ -144,14 +156,14 @@ TicTacToe.controller('tttCtrl', function($scope, $firebase) {
                 checkFtw(box, greenDiagonalRightLeft);
             }
         } else {
-            $scope.bannerText = "this has been selected"; // Maybe have a dynamically updated prompt.
+            $scope.gameContainer.bannerText = "this has been selected"; // Maybe have a dynamically updated prompt.
         }
     };
 
     // Check for a win combo by length row/col/diag array
     var checkFtw = function(box, someArray) {
         if (someArray.length === 3) {
-            $scope.bannerText = box.color + " wins!";
+            $scope.gameContainer.bannerText = box.color + " wins!";
             alert(box.color + " wins!");
             // End the game, yo!
         }
@@ -198,8 +210,8 @@ TicTacToe.controller('tttCtrl', function($scope, $firebase) {
 
     // Reset Game - reset values to default
     $scope.resetGame = function() {
-        $scope.bannerText = "Game reset.";
-        $scope.count = 2;
+        $scope.gameContainer.bannerText = "Game reset.";
+        $scope.gameContainer.counter = 2;
         blueDiagonalLeftRight.length = 0;
         blueDiagonalRightLeft.length = 0;
         blueColumnOne.length = 0;
@@ -217,8 +229,8 @@ TicTacToe.controller('tttCtrl', function($scope, $firebase) {
         greenRowTwo.length = 0;
         greenRowThree.length = 0;
         // Overwrite the color property on each box
-        for (i = 0; i < $scope.boxList.length; i++) {
-            $scope.boxList[i].color = "";
+        for (i = 0; i < $scope.gameContainer.boxList.length; i++) {
+            $scope.gameContainer.boxList[i].color = "";
             console.log("Boxes Reset");
         }
     };
@@ -227,7 +239,24 @@ TicTacToe.controller('tttCtrl', function($scope, $firebase) {
     var TicTacToeRef = new Firebase("https://wdi-ttt.firebaseIO.com/");
     $scope.gameContainer = {
         boxList: $scope.boxList,
-        counter: $scope.count
+        counter: $scope.count,
+        bannerText: $scope.bannerText,
+        blueDiagonalLeftRight: blueDiagonalLeftRight,
+        blueDiagonalRightLeft: blueDiagonalRightLeft,
+        blueColumnOne: blueColumnOne,
+        blueColumnTwo: blueColumnTwo,
+        blueColumnThree: blueColumnThree,
+        blueRowOne: blueRowOne,
+        blueRowTwo: blueRowTwo,
+        blueRowThree: blueRowThree,
+        greenDiagonalLeftRight: greenDiagonalLeftRight,
+        greenDiagonalRightLeft: greenDiagonalRightLeft,
+        greenColumnOne: greenColumnOne,
+        greenColumnTwo: greenColumnTwo,
+        greenColumnThree: greenColumnThree,
+        greenRowOne: greenRowOne,
+        greenRowTwo: greenRowTwo,
+        greenRowThree: greenRowThree
     };
     $scope.remoteGameContainer =
         $firebase(new Firebase("https://wdi-ttt.firebaseIO.com/" + 'remoteGameContainer'));
@@ -235,8 +264,6 @@ TicTacToe.controller('tttCtrl', function($scope, $firebase) {
     $scope.$watch("gameContainer", function() {
         console.log("gameContainer changed!");
     });
-    $scope.remoteCounter = $firebase(new Firebase("https://wdi-ttt.firebaseIO.com/" + 'remoteCounter'));
-
 
 });
 
