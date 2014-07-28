@@ -13,23 +13,21 @@
 </head>
 <body>
 
-	<!-- <div id="question-mark">?</div> -->
-
 	<!-- Tic Tac Toe Game -->
 
-	<div class="container" ng-controller="tttCtrl" ng-model="boxList">
+	<div class="container" ng-controller="tttCtrl" ng-model="gameContainer">
 		<div class="banner">{{bannerText}}</div>
-		<div ng-class="{ box: true, blue: box.color == 'blue', green: box.color =='green' }" ng-click="isSelected(box)" ng-repeat="box in boxList"></div>
-		<!-- <input ng-click="resetGame()" value="reset" type="button" id="reset-button"> -->
+		<div ng-class="{ box: true, blue: box.color == 'blue', green: box.color =='green' }" ng-click="isSelected(box)" ng-repeat="box in gameContainer.boxList"></div>
+		<input ng-click="resetGame()" value="reset" type="button" id="reset-button">
 	</div>
 
 	<!-- Chat Widget -->
 
 
-		<div class="chat-widget container" ng-controller="chatCtrl" ng-model="chatList">
+		<div class="chat-widget container" ng-controller="chatCtrl" ng-model="chatListContainer">
 			<div ng-class="{ chatarea: true, collapsed: wantsToTalk === false, expanded: wantsToTalk === true }" id="chat-area">
-				<div class="responses" ng-repeat="item in chatList track by $index">
-					<p>{{item}}</p>
+				<div class="responses" ng-repeat="message in chatListContainer.chatList track by $index">
+					<p>{{message}}</p>
 				</div>
 			</div>
 			<input id="chat-input" type="text" ng-enter="sendMessage()" ng-model="text" placeholder="say hello" ng-click="turnOnChat()">

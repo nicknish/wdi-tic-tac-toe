@@ -1,13 +1,11 @@
 var TicTacToe = angular.module('TicTacToe', ["firebase"]);
 
+/* Tic Tac Toe Game
+======================= */
 TicTacToe.controller('tttCtrl', function($scope, $firebase) {
 
-    // Firebase Stuff
-    var TicTacToeRef = new Firebase("https://wdi-ttt.firebaseIO.com/");
-    $scope.remoteBoxList = $firebase(new Firebase("https://wdi-ttt.firebaseIO.com/" + '/remoteBoxList'));
-
     // Counter determines player turn
-    var count = 2; // Make this a watched variable by firebase?
+    $scope.count = 2;
 
     // Sweet Dynamic Banner
     $scope.bannerText = "Take a moment to relax.";
@@ -36,11 +34,11 @@ TicTacToe.controller('tttCtrl', function($scope, $firebase) {
     $scope.isSelected = function(box) {
 
         // Blue Stuff!
-        if (count === 11) { // If all the tiles are filled without a winner, then cat's game
+        if ($scope.count === 11) { // If all the tiles are filled without a winner, then cat's game
             $scope.bannerText = "cat's game!";
-        } else if (count % 2 === 0 && box.color === "" && box.color != "green") {
+        } else if ($scope.count % 2 === 0 && box.color === "" && box.color != "green") {
             box.color = "blue";
-            count++;
+            $scope.count++;
             $scope.bannerText = "green's turn";
             // Check Row 1
             if ((box.row === 1 && box.column === 1) || (box.row === 1 && box.column === 2) ||
@@ -92,10 +90,10 @@ TicTacToe.controller('tttCtrl', function($scope, $firebase) {
             }
         }
         // Green Stuff! 
-        else if ((count % 3 === 0 || count / 5 === 1 || count / 7 === 1) &&
+        else if (($scope.count % 3 === 0 || $scope.count / 5 === 1 || $scope.count / 7 === 1) &&
             box.color != "blue" && box.color != "green") {
             box.color = "green";
-            count++;
+            $scope.count++;
             $scope.bannerText = "blue's turn";
             // Check Row 1
             if ((box.row === 1 && box.column === 1) || (box.row === 1 && box.column === 2) ||
@@ -198,16 +196,10 @@ TicTacToe.controller('tttCtrl', function($scope, $firebase) {
         color: ""
     }];
 
-    $scope.remoteBoxList.$bind($scope, "boxList"); //critical firebase stuff
-
-    $scope.$watch("boxList", function() { // more critical firebase stuff
-        console.log("Stuff changes!");
-    });
-
     // Reset Game - reset values to default
     $scope.resetGame = function() {
         $scope.bannerText = "Game reset.";
-        count = 2;
+        $scope.count = 2;
         blueDiagonalLeftRight.length = 0;
         blueDiagonalRightLeft.length = 0;
         blueColumnOne.length = 0;
@@ -224,13 +216,27 @@ TicTacToe.controller('tttCtrl', function($scope, $firebase) {
         greenRowOne.length = 0;
         greenRowTwo.length = 0;
         greenRowThree.length = 0;
-        console.log("am i working?");
         // Overwrite the color property on each box
-        for (i = 0; i < $scope.remoteBoxList.length; i++) {
+        for (i = 0; i < $scope.boxList.length; i++) {
             $scope.boxList[i].color = "";
-            console.log("SUP BRO?");
+            console.log("Boxes Reset");
         }
     };
+
+    // Firebase Stuff 
+    var TicTacToeRef = new Firebase("https://wdi-ttt.firebaseIO.com/");
+    $scope.gameContainer = {
+        boxList: $scope.boxList,
+        counter: $scope.count
+    };
+    $scope.remoteGameContainer =
+        $firebase(new Firebase("https://wdi-ttt.firebaseIO.com/" + 'remoteGameContainer'));
+    $scope.remoteGameContainer.$bind($scope, "gameContainer");
+    $scope.$watch("gameContainer", function() {
+        console.log("gameContainer changed!");
+    });
+    $scope.remoteCounter = $firebase(new Firebase("https://wdi-ttt.firebaseIO.com/" + 'remoteCounter'));
+
 
 });
 
@@ -243,13 +249,6 @@ TicTacToe.controller('chatCtrl', function($scope, $firebase) {
     $scope.chatList = [];
     var chatArea = document.getElementById('chat-area');
     $scope.wantsToTalk = false;
-    $scope.remoteChatList = $firebase(new Firebase("https://wdi-ttt.firebaseIO.com/" + '/remoteChatList'));
-
-    // $scope.remoteChatList.$bind($scope, "chatList"); //critical firebase stuff
-
-    $scope.$watch("chatList", function() { // more critical firebase stuff
-        console.log("Chatbox updated!!");
-    });
 
     // Add a comment to the chatbox.
     $scope.sendMessage = function() {
@@ -270,6 +269,18 @@ TicTacToe.controller('chatCtrl', function($scope, $firebase) {
         $scope.wantsToTalk = false;
         $scope.text = "";
     };
+
+    // Firebase Stuff 
+    $scope.chatListContainer = {
+        chatList: $scope.chatList
+    };
+    $scope.remoteChatListContainer =
+        $firebase(new Firebase("https://wdi-ttt.firebaseIO.com/" + 'remoteChatList'));
+    $scope.remoteChatListContainer.$bind($scope, "chatListContainer");
+    $scope.$watch("chatListContainer", function() {
+        console.log("Chatbox updated");
+    });
+
 });
 
 // Detect when enter is pressed
@@ -285,9 +296,3 @@ TicTacToe.directive('ngEnter', function() {
         });
     }
 });
-
-// Firechat
-
-// var chatRef = new Firebase('https://wdi-ttt.firebaseio.com/chat');
-// var chat = new FirechatUI(chatRef, document.getElementById("firechat-wrapper"));
-// chat.setUser('<user-id>', '<display-name>');
